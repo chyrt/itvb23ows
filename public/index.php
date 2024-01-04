@@ -124,7 +124,7 @@
         <div class="turn">
             Turn: <?php if ($player == 0) echo "White"; else echo "Black"; ?>
         </div>
-        <form method="post" action="play.php">
+        <form method="post" action="../src/play.php">
             <select name="piece">
                 <?php
                     foreach ($hand[$player] as $tile => $ct) {
@@ -141,7 +141,7 @@
             </select>
             <input type="submit" value="Play">
         </form>
-        <form method="post" action="move.php">
+        <form method="post" action="../src/move.php">
             <select name="from">
                 <?php
                     foreach (array_keys($board) as $pos) {
@@ -158,10 +158,10 @@
             </select>
             <input type="submit" value="Move">
         </form>
-        <form method="post" action="pass.php">
+        <form method="post" action="../src/pass.php">
             <input type="submit" value="Pass">
         </form>
-        <form method="post" action="restart.php">
+        <form method="post" action="../src/restart.php">
             <input type="submit" value="Restart">
         </form>
         <strong><?php if (isset($_SESSION['error'])) echo($_SESSION['error']); unset($_SESSION['error']); ?></strong>
@@ -176,7 +176,7 @@
                 }
             ?>
         </ol>
-        <form method="post" action="undo.php">
+        <form method="post" action="../src/undo.php">
             <input type="submit" value="Undo">
         </form>
     </body>
