@@ -2,19 +2,18 @@ version: '3.1'
 
 services:
   web:
-    build: .
+    build: ./webapp
     ports:
       - "80:80"
     depends_on:
       - db
 
   db:
-    image: mysql:8.0
+    build: ./database
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: hive
-    volumes:
-      - ./sql:/docker-entrypoint-initdb.d
-    ports:
-      - "3306:3306"
+
 
