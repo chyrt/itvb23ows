@@ -6,7 +6,7 @@ pipeline {
             steps {
                 // Bouwt de Docker containers
                 script {
-                    sh 'docker-compose build'
+                    sh 'php --version'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
                 // Voeg stappen toe voor deployment
                 // Bijvoorbeeld, Docker containers starten
                 script {
-                    sh 'docker-compose up -d'
+                    sh 'php --version'
                 }
             }
         }
