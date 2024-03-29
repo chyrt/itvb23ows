@@ -2,17 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image 'php:7.4-apache'
-                }
-            }
+        stage('SCM') {
             steps {
-                // Bouwt de Docker containers
-                script {
-                    sh 'docker compose build'
-                }
+                checkout scm
             }
         }
 
