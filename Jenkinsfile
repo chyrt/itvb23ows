@@ -8,6 +8,7 @@ pipeline {
             steps {
                 echo 'Building Docker containers...'
                 sh 'php -v'
+                sh 'docker --version'
             }
         }
 
