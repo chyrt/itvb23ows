@@ -9,11 +9,6 @@ pipeline {
         }
 
         stage('Test') {
-            agent {
-                docker {
-                    image 'php:7.4-apache'
-                }
-            }
             steps {
                 // Voer uw testscripts uit (indien aanwezig)
                 // Voorbeeld: sh 'docker-compose run webapp phpunit'
@@ -22,16 +17,11 @@ pipeline {
         }
 
         stage('Deploy') {
-            agent {
-                docker {
-                    image 'php:7.4-apache'
-                }
-            }
             steps {
                 // Voeg stappen toe voor deployment
                 // Bijvoorbeeld, Docker containers starten
                 script {
-                    sh 'docker-compose up -d'
+                    sh 'docker compose up -d'
                 }
             }
         }
@@ -41,7 +31,7 @@ pipeline {
         always {
             // Opruimen na de pipeline is voltooid
             script {
-                sh 'docker-compose down'
+                sh 'docker compose down'
             }
         }
     }
