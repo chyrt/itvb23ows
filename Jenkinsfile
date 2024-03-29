@@ -1,40 +1,19 @@
 pipeline {
-    agent any
+    agent { dockerfile true }
 
     stages {
         stage('Build') {
             steps {
-                // Bouwt de Docker containers
-                script {
-                    sh 'php --version'
-                }
+                echo 'Building Docker containers...'
+                sh 'php -v'
             }
         }
 
-        stage('Test') {
+        stage('Test Web') {
             steps {
-                // Voer uw testscripts uit (indien aanwezig)
-                // Voorbeeld: sh 'docker-compose run webapp phpunit'
-                sh 'php --version'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Voeg stappen toe voor deployment
-                // Bijvoorbeeld, Docker containers starten
-                script {
-                    sh 'php --version'
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            // Opruimen na de pipeline is voltooid
-            script {
-                sh 'docker-compose down'
+                echo 'Running tests in the Web container...'
+                // Vervang 'your_test_script.sh' met je daadwerkelijke test commando of script
+                // sh 'docker-compose run web your_test_script.sh'
             }
         }
     }
