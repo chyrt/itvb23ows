@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'php:7.4-cli' }
+        docker { image 'php:latest' }
     }
 
     stages {
