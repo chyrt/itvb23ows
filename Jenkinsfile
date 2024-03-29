@@ -11,7 +11,7 @@ pipeline {
             steps {
                 // Bouwt de Docker containers
                 script {
-                    sh 'docker-compose build'
+                    sh 'docker compose build'
                 }
             }
         }
