@@ -1,8 +1,9 @@
+version: '3.8'
 services:
   web:
     build: .
     ports:
-      - "8100:80"
+      - "80:80"
     depends_on:
       - db
 
@@ -11,7 +12,7 @@ services:
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - ./hive.sql:/docker-entrypoint-initdb.d/hive.sql
+      - ./database/sql/hive.sql:/docker-entrypoint-initdb.d/hive.sql
       - data:/var/lib/mysql
 
 

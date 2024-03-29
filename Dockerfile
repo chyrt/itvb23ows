@@ -3,5 +3,5 @@ WORKDIR /app
 
 RUN docker-php-ext-install mysqli
 
-COPY src/ ./
+COPY webapp/src/ ./
 CMD ["php", "-S", "0.0.0.0:80"]
