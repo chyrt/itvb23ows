@@ -9,13 +9,9 @@ pipeline {
         }
 
         stage('Test') {
-            agent {
-                docker {
-                        image 'composer:lts'
-                    }
-                }
             steps {
-                sh 'composer install'
+                // Voer uw testscripts uit (indien aanwezig)
+                // Voorbeeld: sh 'docker-compose run webapp phpunit'
                 sh 'php --version'
             }
         }
