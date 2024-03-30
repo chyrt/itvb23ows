@@ -1,23 +1,18 @@
 pipeline {
-    agent {
-        docker { image 'php:latest' }
-    }
-
+    agent any
     stages {
-        stage('Build') {
+        stage('Docker compose up') {
             steps {
-                echo 'Building Docker containers...'
-                sh 'php -v'
-                sh 'docker --version'
+                script {
+                    sh 'echo "Building..."'
+                    sh 'docker compose up --build -d'
+                }
             }
         }
-
-        stage('Test Web') {
-            steps {
-                echo 'Running tests in the Web container...'
-                // Vervang 'your_test_script.sh' met je daadwerkelijke test commando of script
-                // sh 'docker-compose run web your_test_script.sh'
-            }
+    }
+    post {
+        always {
+            sh 'docker compose down'
         }
     }
 }
