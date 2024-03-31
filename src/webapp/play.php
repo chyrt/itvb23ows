@@ -2,7 +2,7 @@
 
 session_start();
 
-include_once 'util.php';
+use App\Src\Util;
 
 $piece = $_POST['piece'];
 $to = $_POST['to'];
@@ -19,9 +19,9 @@ if (!$hand[$piece])
     $_SESSION['error'] = "Player does not have tile";
 elseif (isset($board[$to]))
     $_SESSION['error'] = 'Board position is not empty';
-elseif (count($board) && !hasNeighBour($to, $board))
+elseif (count($board) && !Util::hasNeighBour($to, $board))
     $_SESSION['error'] = "board position has no neighbour";
-elseif (array_sum($hand) < 11 && !neighboursAreSameColor($player, $to, $board))
+elseif (array_sum($hand) < 11 && !Util::neighboursAreSameColor($player, $to, $board))
     $_SESSION['error'] = "Board position has opposing neighbour";
 elseif (array_sum($hand) <= 8 && $hand['Q']) {
     $_SESSION['error'] = 'Must play queen bee';
@@ -37,5 +37,3 @@ elseif (array_sum($hand) <= 8 && $hand['Q']) {
 }
 
 header('Location: index.php');
-
-?>

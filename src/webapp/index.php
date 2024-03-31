@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    include_once 'util.php';
+    use App\Src\Util;
 
     if (!isset($_SESSION['board'], $_SESSION['player'], $_SESSION['hand'])) {
         header('Location: restart.php');

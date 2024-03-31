@@ -2,7 +2,7 @@
 
 session_start();
 
-include_once 'util.php';
+use App\Src\Util;
 
 $from = $_POST['from'];
 $to = $_POST['to'];
@@ -24,7 +24,7 @@ elseif ($hand['Q'])
     $_SESSION['error'] = "Queen bee is not played";
 else {
     $tile = array_pop($board[$from]);
-    if (!hasNeighBour($to, $board))
+    if (!Util::hasNeighBour($to, $board))
         $_SESSION['error'] = "Move would split hive";
     else {
         $all = array_keys($board);
@@ -47,7 +47,7 @@ else {
             if ($from == $to) $_SESSION['error'] = 'Tile must move';
             elseif (isset($board[$to]) && $tile[1] != "B") $_SESSION['error'] = 'Tile not empty';
             elseif ($tile[1] == "Q" || $tile[1] == "B") {
-                if (!slide($board, $from, $to))
+                if (!Util::slide($board, $from, $to))
                     $_SESSION['error'] = 'Tile must slide';
             }
         }
@@ -69,5 +69,3 @@ else {
 }
 
 header('Location: index.php');
-
-?>
