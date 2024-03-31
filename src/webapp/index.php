@@ -2,7 +2,8 @@
 
 session_start();
 
-require_once 'vendor/autoload.php';
+require_once './vendor/autoload.php';
+require_once  'utils/util.php';
 
 use utils\Util;
 
@@ -15,7 +16,7 @@ $player = $_SESSION['player'];
 $hand = $_SESSION['hand'];
 
 $to = [];
-foreach (UTIL::$OFFSETS as $pq) {
+foreach (Util::$OFFSETS as $pq) {
     foreach (array_keys($board) as $pos) {
         $pq2 = explode(',', $pos);
         $to[] = ($pq[0] + $pq2[0]).','.($pq[1] + $pq2[1]);

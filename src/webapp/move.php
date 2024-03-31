@@ -2,6 +2,7 @@
 
 session_start();
 
+require_once  'utils/util.php';
 use utils\Util;
 
 $from = $_POST['from'];
