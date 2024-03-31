@@ -2,7 +2,7 @@
 
 session_start();
 
-use App\Src\Util;
+use utils\Util;
 
 $piece = $_POST['piece'];
 $to = $_POST['to'];

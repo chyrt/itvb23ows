@@ -14,4 +14,3 @@ $_SESSION['last_move'] = $result[5];
 setState($result[6]);
 header('Location: index.php');
 
-?>
