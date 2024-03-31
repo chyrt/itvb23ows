@@ -1,11 +1,11 @@
 <?php
 
-include_once '../../config.php';
+use App\Config\Config;
 
-$host = getenv("DB_HOST");
-$user = getenv("DB_USER");
-$pass = getenv("DB_PASS");
-$name = getenv("DB_NAME");
+$host = Config::$dbHost;
+$user = Config::$dbUser;
+$pass = Config::$dbPassword;
+$name = Config::$dbName;
 
 function getState() {
     return serialize([$_SESSION['hand'], $_SESSION['board'], $_SESSION['player']]);
