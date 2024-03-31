@@ -7,11 +7,11 @@ $user = getenv("DB_USER");
 $pass = getenv("DB_PASS");
 $name = getenv("DB_NAME");
 
-function get_state() {
+function getState() {
     return serialize([$_SESSION['hand'], $_SESSION['board'], $_SESSION['player']]);
 }
 
-function set_state($state) {
+function setState($state) {
     list($a, $b, $c) = unserialize($state);
     $_SESSION['hand'] = $a;
     $_SESSION['board'] = $b;
@@ -25,5 +25,3 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 return $conn;
-
-?>

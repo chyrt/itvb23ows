@@ -3,7 +3,7 @@
 
     include_once 'util.php';
 
-    if (!isset($_SESSION['board'])) {
+    if (!isset($_SESSION['board'], $_SESSION['player'], $_SESSION['hand'])) {
         header('Location: restart.php');
         exit(0);
     }
