@@ -12,7 +12,7 @@
     $hand = $_SESSION['hand'];
 
     $to = [];
-    foreach ($GLOBALS['OFFSETS'] as $pq) {
+    foreach (UTIL::$OFFSETS as $pq) {
         foreach (array_keys($board) as $pos) {
             $pq2 = explode(',', $pos);
             $to[] = ($pq[0] + $pq2[0]).','.($pq[1] + $pq2[1]);

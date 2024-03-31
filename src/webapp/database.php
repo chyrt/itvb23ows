@@ -2,8 +2,7 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-echo "Het pad naar het .env bestand is: " . __DIR__;
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 $host = $_ENV['DB_HOST'];
