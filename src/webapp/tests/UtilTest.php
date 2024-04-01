@@ -4,6 +4,7 @@ namespace tests;
 
 use utils\Util;
 use PHPUnit\Framework\TestCase;
+require_once  '../utils/util.php';
 
 class UtilTest extends TestCase
 {

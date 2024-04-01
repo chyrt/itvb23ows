@@ -18,7 +18,7 @@ COPY src/webapp/composer.json src/webapp/composer.lock ./
 
 # Run Composer install to install the dependencies
 # --no-scripts and --no-autoloader for optimized autoloader and ensuring scripts don't run at this stage
-RUN composer install --no-scripts --no-autoloader
+RUN composer install --no-scripts
 
 # Copy the rest of the application code to /app
 COPY src/webapp/ ./

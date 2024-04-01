@@ -3,7 +3,7 @@
         'name' => 'chyrt/ows',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'd9f4c6e58524aa0b04620d6df1b4ada62c4409ca',
+        'reference' => 'd9957dcf613e46434a210d75326d26b0f1347ed4',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'chyrt/ows' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd9f4c6e58524aa0b04620d6df1b4ada62c4409ca',
+            'reference' => 'd9957dcf613e46434a210d75326d26b0f1347ed4',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
