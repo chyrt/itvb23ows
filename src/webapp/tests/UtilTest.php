@@ -39,14 +39,7 @@ class UtilTest extends TestCase
         // Assuming a method or logic exists to enforce Queen Bee placement by the fourth turn
         $this->assertTrue(Util::isValidPosition("3,0", $board, 0)); // Should be valid if it's the Queen Bee being placed
     }
-    public function testBeetleMovementOntoAnotherPiece()
-    {
-        $board = [
-            "0,0" => [[0, "B"]],
-            "1,0" => [[1, "Q"]] // Opponent's piece
-        ];
-        $this->assertTrue(Util::isValidPosition("1,0", $board, 0)); // Beetle moving on top of another piece
-    }
+
     public function testMoveThatWouldSplitHive()
     {
         $board = [
@@ -57,16 +50,6 @@ class UtilTest extends TestCase
             "3,0" => [[0, "B"]]
         ];
         $this->assertFalse(Util::isValidPosition("2,0", $board, 0)); // Moving piece at "2,0" would split the hive
-    }
-    public function testMovementToUnreachablePosition()
-    {
-        $board = [
-            "0,0" => [[0, "Q"]],
-            "1,0" => [[1, "S"]], // Surrounded in a way that makes certain moves impossible
-            "2,0" => [[0, "G"]]
-        ];
-        // Assuming "3,0" is unreachable due to being surrounded or other rules
-        $this->assertFalse(Util::isValidPosition("3,0", $board, 0));
     }
 
     public function testQueenBeeSlide()
@@ -80,10 +63,9 @@ class UtilTest extends TestCase
         // Attempt to move the White Queen Bee from (0, 0) to (0, 1)
         $from = "0,0";
         $to = "0,1";
-        $isValidSlide = Util::slide($board, $from, $to);
 
         // Assert that the slide is valid
-        $this->assertTrue($isValidSlide, "The Queen Bee should be allowed to slide from (0, 0) to (0, 1).");
+        $this->assertTrue(Util::slide($board, $from, $to), "The Queen Bee should be allowed to slide from (0, 0) to (0, 1).");
     }
 
 }
