@@ -67,4 +67,15 @@ class UtilTest extends TestCase
         // Assuming "3,0" is unreachable due to being surrounded or other rules
         $this->assertFalse(Util::isValidPosition("3,0", $board, 0));
     }
+
+    public function testQueenBeeValidMove()
+    {
+        $board = [
+            "0,0" => [[0, "Q"]], // White's Queen Bee
+            "1,0" => [[1, "S"]]  // Black's piece
+        ];
+        $player = 0; // White
+        $this->assertTrue(Util::isValidPosition("0,1", $board, $player), "Queen Bee should be allowed to move to (0,1)");
+    }
+
 }

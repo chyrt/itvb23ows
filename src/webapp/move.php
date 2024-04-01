@@ -33,7 +33,7 @@ else {
         $queue = [array_shift($all)];
         while ($queue) {
             $next = explode(',', array_shift($queue));
-            foreach ($GLOBALS['OFFSETS'] as $pq) {
+            foreach (Util::$OFFSETS as $pq) {
                 list($p, $q) = $pq;
                 $p += $next[0];
                 $q += $next[1];
