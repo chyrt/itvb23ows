@@ -3,7 +3,8 @@
     "description": "ows project",
     "autoload": {
         "psr-4": {
-            "utils\\": "utils"
+            "utils\\": "utils/",
+            "tests\\": "tests/"
         }
     },
     "require": {
@@ -13,5 +14,8 @@
         {
             "name": "chyrt"
         }
-    ]
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    }
 }

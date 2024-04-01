@@ -133,14 +133,18 @@ if (!count($to)) $to[] = '0,0';
             <select name="piece">
                 <?php
                     foreach ($hand[$player] as $tile => $ct) {
-                        echo "<option value=\"$tile\">$tile</option>";
+                        if ($ct > 0) { // Check of de speler deze steen nog heeft
+                            echo "<option value=\"$tile\">$tile</option>";
+                        }
                     }
                 ?>
             </select>
             <select name="to">
                 <?php
                     foreach ($to as $pos) {
-                        echo "<option value=\"$pos\">$pos</option>";
+                        if (Util::isValidPosition($pos, $board, $player)) { // Functie die checkt of de positie valide is
+                            echo "<option value=\"$pos\">$pos</option>";
+                        }
                     }
                 ?>
             </select>
@@ -150,14 +154,18 @@ if (!count($to)) $to[] = '0,0';
             <select name="from">
                 <?php
                     foreach (array_keys($board) as $pos) {
-                        echo "<option value=\"$pos\">$pos</option>";
+                        if (Util::belongsToPlayer($pos, $board, $player)) { // Functie die checkt of de positie stenen van de speler bevat
+                            echo "<option value=\"$pos\">$pos</option>";
+                        }
                     }
                 ?>
             </select>
             <select name="to">
                 <?php
                     foreach ($to as $pos) {
-                        echo "<option value=\"$pos\">$pos</option>";
+                        if (Util::isValidPosition($pos, $board, $player)) { // Functie die checkt of de positie valide is
+                            echo "<option value=\"$pos\">$pos</option>";
+                        }
                     }
                 ?>
             </select>

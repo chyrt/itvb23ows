@@ -53,4 +53,69 @@ class Util
         if (!isset($board[$common[0]]) && !isset($board[$common[1]]) && !isset($board[$from]) && !isset($board[$to])) return false;
         return min(self::len($board[$common[0]]), self::len($board[$common[1]])) <= max(self::len($board[$from]), self::len($board[$to]));
     }
+
+    public static function belongsToPlayer($pos, $board, $player) {
+        if (!isset($board[$pos])) {
+            return false;
+        }
+        $tileStack = $board[$pos];
+        $topTile = end($tileStack);
+        return $topTile[0] == $player;
+    }
+
+    public static function isBoardEmpty($board) {
+        foreach ($board as $pos => $tiles) {
+            if (!empty($tiles)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the position is valid for placing or moving a piece.
+     *
+     * @param string $to The target position.
+     * @param array $board The current state of the board.
+     * @param int $player The current player (0 or 1).
+     * @return bool True if the position is valid, otherwise false.
+     */
+    public static function isValidPosition($to, $board, $player) {
+        // Rule 1: The position must be adjacent to at least one other piece,
+        // except for the first move.
+        if (!self::hasNeighBour($to, $board) && count($board) > 0) {
+            return false;
+        }
+
+        // Rule 2: The position must not be occupied.
+        if (isset($board[$to])) {
+            return false;
+        }
+
+        // Rule 3: If it's not the first move, the piece must be adjacent to a friendly piece.
+        // This is a simplification and might need adjustment based on Hive's complex rules,
+        // especially regarding the Queen Bee and other pieces' unique movement rules.
+        if (count($board) > 1 && !self::isNextToFriendlyPiece($to, $board, $player)) {
+            return false;
+        }
+
+        return true; // Passes all checks
+    }
+
+    /**
+     * Checks if the position is adjacent to at least one piece belonging to the player.
+     *
+     * @param string $pos The target position.
+     * @param array $board The current state of the board.
+     * @param int $player The current player (0 or 1).
+     * @return bool True if adjacent to a friendly piece, otherwise false.
+     */
+    private static function isNextToFriendlyPiece($pos, $board, $player) {
+        foreach ($board as $b => $st) {
+            if (!$st) continue;
+            $c = $st[count($st) - 1][0];
+            if ($c == $player && self::isNeighbour($pos, $b)) return true;
+        }
+        return false;
+    }
 }

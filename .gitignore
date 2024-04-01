@@ -1,1 +1,4 @@
 /hive.bundle
+data/
+jenkins-data/
+vendor/
