@@ -68,14 +68,21 @@ class UtilTest extends TestCase
         $this->assertFalse(Util::isValidPosition("3,0", $board, 0));
     }
 
-    public function testQueenBeeValidMove()
+    public function testQueenBeeSlide()
     {
+        // Simulate the board state
         $board = [
-            "0,0" => [[0, "Q"]], // White's Queen Bee
-            "1,0" => [[1, "S"]]  // Black's piece
+            "0,0" => [[0, "Q"]], // White Queen Bee at (0, 0)
+            "1,0" => [[1, "S"]]  // Black piece at (1, 0)
         ];
-        $player = 0; // White
-        $this->assertTrue(Util::isValidPosition("0,1", $board, $player), "Queen Bee should be allowed to move to (0,1)");
+
+        // Attempt to move the White Queen Bee from (0, 0) to (0, 1)
+        $from = "0,0";
+        $to = "0,1";
+        $isValidSlide = Util::slide($board, $from, $to);
+
+        // Assert that the slide is valid
+        $this->assertTrue($isValidSlide, "The Queen Bee should be allowed to slide from (0, 0) to (0, 1).");
     }
 
 }
