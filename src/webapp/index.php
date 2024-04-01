@@ -4,6 +4,7 @@ session_start();
 
 require_once './vendor/autoload.php';
 require_once  'utils/util.php';
+require_once 'database.php';
 
 use utils\Util;
 
@@ -171,8 +172,8 @@ if (!count($to)) $to[] = '0,0';
         <strong><?php if (isset($_SESSION['error'])) echo($_SESSION['error']); unset($_SESSION['error']); ?></strong>
         <ol>
             <?php
-                $db = include 'database.php';
-                $stmt = $db->prepare('SELECT * FROM moves WHERE game_id = '.$_SESSION['game_id']);
+                $dbSingleton = DatabaseSingleton::getInstance();
+                $stmt = $dbSingleton->prepare('SELECT * FROM moves WHERE game_id = '.$_SESSION['game_id']);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($row = $result->fetch_array()) {

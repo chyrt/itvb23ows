@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once 'database.php'; // Adjusted to use the updated database singleton
+require_once 'database.php';
 require_once 'utils/util.php';
 use utils\Util;
 
@@ -62,9 +62,8 @@ else {
         else $board[$to] = [$tile];
         $_SESSION['player'] = 1 - $_SESSION['player'];
 
-        // Adjusted to use the Singleton instance for database access and getState method
         $dbSingleton = DatabaseSingleton::getInstance();
-        $state = $dbSingleton->getState(); // Updated to use the method from the singleton
+        $state = $dbSingleton->getState();
         $stmt = $dbSingleton->prepare('INSERT INTO moves (game_id, type, move_from, move_to, previous_id, state) VALUES (?, "move", ?, ?, ?, ?)');
         $stmt->bind_param('issis', $_SESSION['game_id'], $from, $to, $_SESSION['last_move'], $state);
         $stmt->execute();
