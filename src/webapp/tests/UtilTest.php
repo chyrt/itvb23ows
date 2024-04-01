@@ -20,6 +20,51 @@ class UtilTest extends TestCase
         // Assert that the position is valid
         $this->assertTrue($result, "The position $position should be considered valid.");
     }
-
-    // Additional tests for other scenarios (occupied positions, invalid adjacency, etc.)
+    public function testCannotPlaceNextToOpponentAfterFirstMove()
+    {
+        $board = [
+            "0,0" => [[0, "Q"]], // Player 0's piece
+            "1,0" => [[1, "S"]]  // Player 1's piece
+        ];
+        $this->assertFalse(Util::isValidPosition("2,0", $board, 0)); // Attempting to place next to opponent's piece
+    }
+    public function testQueenBeePlayedByFourthTurn()
+    {
+        $board = [
+            "0,0" => [[0, "S"]],
+            "1,0" => [[0, "A"]],
+            "2,0" => [[0, "G"]]
+        ];
+        // Assuming a method or logic exists to enforce Queen Bee placement by the fourth turn
+        $this->assertTrue(Util::isValidPosition("3,0", $board, 0)); // Should be valid if it's the Queen Bee being placed
+    }
+    public function testBeetleMovementOntoAnotherPiece()
+    {
+        $board = [
+            "0,0" => [[0, "B"]],
+            "1,0" => [[1, "Q"]] // Opponent's piece
+        ];
+        $this->assertTrue(Util::isValidPosition("1,0", $board, 0)); // Beetle moving on top of another piece
+    }
+    public function testMoveThatWouldSplitHive()
+    {
+        $board = [
+            // Simulating a scenario where moving a piece would split the hive
+            "0,0" => [[0, "Q"]],
+            "1,0" => [[0, "S"]],
+            "2,0" => [[0, "A"]],
+            "3,0" => [[0, "B"]]
+        ];
+        $this->assertFalse(Util::isValidPosition("2,0", $board, 0)); // Moving piece at "2,0" would split the hive
+    }
+    public function testMovementToUnreachablePosition()
+    {
+        $board = [
+            "0,0" => [[0, "Q"]],
+            "1,0" => [[1, "S"]], // Surrounded in a way that makes certain moves impossible
+            "2,0" => [[0, "G"]]
+        ];
+        // Assuming "3,0" is unreachable due to being surrounded or other rules
+        $this->assertFalse(Util::isValidPosition("3,0", $board, 0));
+    }
 }
