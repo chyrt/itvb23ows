@@ -2,7 +2,8 @@
 
 session_start();
 
-require_once  'utils/util.php';
+require_once 'database.php'; // Adjusted to use the updated database singleton
+require_once 'utils/util.php';
 use utils\Util;
 
 $from = $_POST['from'];
@@ -60,11 +61,14 @@ else {
         if (isset($board[$to])) array_push($board[$to], $tile);
         else $board[$to] = [$tile];
         $_SESSION['player'] = 1 - $_SESSION['player'];
-        $db = include 'database.php';
-        $stmt = $db->prepare('insert into moves (game_id, type, move_from, move_to, previous_id, state) values (?, "move", ?, ?, ?, ?)');
-        $stmt->bind_param('issis', $_SESSION['game_id'], $from, $to, $_SESSION['last_move'], getState());
+
+        // Adjusted to use the Singleton instance for database access and getState method
+        $dbSingleton = DatabaseSingleton::getInstance();
+        $state = $dbSingleton->getState(); // Updated to use the method from the singleton
+        $stmt = $dbSingleton->prepare('INSERT INTO moves (game_id, type, move_from, move_to, previous_id, state) VALUES (?, "move", ?, ?, ?, ?)');
+        $stmt->bind_param('issis', $_SESSION['game_id'], $from, $to, $_SESSION['last_move'], $state);
         $stmt->execute();
-        $_SESSION['last_move'] = $db->insert_id;
+        $_SESSION['last_move'] = $dbSingleton->getInsertId();
     }
     $_SESSION['board'] = $board;
 }
