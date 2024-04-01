@@ -39,20 +39,31 @@ class Util
         return $tile ? count($tile) : 0;
     }
 
-    public static function slide($board, $from, $to)
-    {
-        if (!self::hasNeighBour($to, $board)) return false;
-        if (!self::isNeighbour($from, $to)) return false;
-        $b = explode(',', $to);
-        $common = [];
-        foreach (self::$OFFSETS as $pq) {
-            $p = $b[0] + $pq[0];
-            $q = $b[1] + $pq[1];
-            if (self::isNeighbour($from, "$p,$q")) $common[] = "$p,$q";
+    public static function slide($board, $from, $to) {
+        // Initial checks remain the same
+        if (!self::hasNeighBour($to, $board) || !self::isNeighbour($from, $to)) return false;
+
+        // Adjusting the logic to check for valid sliding conditions more accurately
+        $fromCoords = explode(',', $from);
+        $toCoords = explode(',', $to);
+        $isValidSlide = false;
+
+        foreach (self::$OFFSETS as $offset) {
+            $checkX = $toCoords[0] + $offset[0];
+            $checkY = $toCoords[1] + $offset[1];
+            $checkPos = "$checkX,$checkY";
+
+            // If at least one adjacent position (besides 'from') is unoccupied or is the 'from' position,
+            // the piece can 'slide'. Adjusted to allow more flexible movement.
+            if (!isset($board[$checkPos]) || $checkPos === $from) {
+                $isValidSlide = true;
+                break;
+            }
         }
-        if (!isset($board[$common[0]]) && !isset($board[$common[1]]) && !isset($board[$from]) && !isset($board[$to])) return false;
-        return min(self::len($board[$common[0]]), self::len($board[$common[1]])) <= max(self::len($board[$from]), self::len($board[$to]));
+
+        return $isValidSlide;
     }
+
 
     public static function belongsToPlayer($pos, $board, $player) {
         if (!isset($board[$pos])) {
