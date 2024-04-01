@@ -27,7 +27,7 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 echo 'Uitvoeren van unit tests...'
-                sh ' php vendor/bin/phpunit tests'
+                sh './src/webapp/vendor/bin/phpunit tests'
             }
         }
     }
