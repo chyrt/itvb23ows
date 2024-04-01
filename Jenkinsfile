@@ -27,7 +27,7 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 echo 'Uitvoeren van unit tests...'
-                sh 'vendor/bin/phpunit tests'
+                sh 'docker-compose exec web vendor/bin/phpunit tests'
             }
         }
     }
