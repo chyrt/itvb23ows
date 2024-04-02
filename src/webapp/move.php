@@ -60,6 +60,9 @@ else {
     } else {
         if (isset($board[$to])) array_push($board[$to], $tile);
         else $board[$to] = [$tile];
+
+        Util::freePositionAfterMove($board, $from);
+
         $_SESSION['player'] = 1 - $_SESSION['player'];
 
         $dbSingleton = DatabaseSingleton::getInstance();

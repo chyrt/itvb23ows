@@ -83,4 +83,27 @@ class UtilTest extends TestCase
         $this->assertTrue(Util::validatePlayQueenWithinFourMoves('D', $hand));
     }
 
+    public function testFreePositionAfterMove()
+    {
+        // Scenario setup: een eenvoudig bord met één steen die verplaatst zal worden
+        $board = [
+            '0,0' => [['W', 'B']], // Aanname: formaat [Player, PieceType]
+            '1,1' => [] // Bestemming positie
+        ];
+        $from = '0,0';
+        $to = '1,1';
+
+        // Voer de beweging uit
+        $tile = array_pop($board[$from]);
+        $board[$to][] = $tile;
+
+        // Roep de methode aan die getest wordt
+        Util::freePositionAfterMove($board, $from);
+
+        // Assertions
+        $this->assertArrayHasKey($from, $board, "De oorspronkelijke positie moet nog steeds bestaan na het verplaatsen.");
+        $this->assertEmpty($board[$from], "De oorspronkelijke positie moet leeg zijn na het verplaatsen.");
+        $this->assertNotEmpty($board[$to], "De bestemmingspositie moet niet leeg zijn na het verplaatsen.");
+    }
+
 }

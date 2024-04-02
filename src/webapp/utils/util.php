@@ -134,4 +134,10 @@ class Util
     {
         return $piece != 'Q' && array_sum($hand) <= 8 && $hand['Q'];
     }
+
+    public static function freePositionAfterMove(&$board, $from) {
+        if (isset($board[$from])) {
+            unset($board[$from]); // Mark the position as free
+        }
+    }
 }
