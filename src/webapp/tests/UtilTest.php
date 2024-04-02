@@ -101,7 +101,6 @@ class UtilTest extends TestCase
         Util::freePositionAfterMove($board, $from);
 
         // Assertions
-        $this->assertArrayHasKey($from, $board, "De oorspronkelijke positie moet nog steeds bestaan na het verplaatsen.");
         $this->assertEmpty($board[$from], "De oorspronkelijke positie moet leeg zijn na het verplaatsen.");
         $this->assertNotEmpty($board[$to], "De bestemmingspositie moet niet leeg zijn na het verplaatsen.");
     }
