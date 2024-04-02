@@ -68,4 +68,19 @@ class UtilTest extends TestCase
         $this->assertTrue(Util::slide($board, $from, $to), "The Queen Bee should be allowed to slide from (0, 0) to (0, 1).");
     }
 
+    public function testQueenPlayedWithinFirstThreeMoves() {
+        $hand = ['Q' => 1, 'A' => 1, 'B' => 1, 'C' => 1];
+        $this->assertTrue(Util::validatePlayQueenWithinFourMoves('Q', $hand));
+    }
+
+    public function testQueenNotPlayedWithinFirstThreeMoves() {
+        $hand = ['Q' => 1, 'A' => 0, 'B' => 0, 'C' => 0];
+        $this->assertFalse(Util::validatePlayQueenWithinFourMoves('A', $hand));
+    }
+
+    public function testMoreThanThreeMovesWithoutPlayingQueen() {
+        $hand = ['Q' => 1, 'A' => 0, 'B' => 0, 'C' => 0, 'D' => 1];
+        $this->assertFalse(Util::validatePlayQueenWithinFourMoves('D', $hand));
+    }
+
 }
