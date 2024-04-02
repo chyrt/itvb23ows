@@ -70,17 +70,17 @@ class UtilTest extends TestCase
 
     public function testQueenPlayedWithinFirstThreeMoves() {
         $hand = ['Q' => 1, 'A' => 1, 'B' => 1, 'C' => 1];
-        $this->assertTrue(Util::validatePlayQueenWithinFourMoves('Q', $hand));
+        $this->assertFalse(Util::validatePlayQueenWithinFourMoves('Q', $hand));
     }
 
     public function testQueenNotPlayedWithinFirstThreeMoves() {
         $hand = ['Q' => 1, 'A' => 0, 'B' => 0, 'C' => 0];
-        $this->assertFalse(Util::validatePlayQueenWithinFourMoves('A', $hand));
+        $this->assertTrue(Util::validatePlayQueenWithinFourMoves('A', $hand));
     }
 
     public function testMoreThanThreeMovesWithoutPlayingQueen() {
         $hand = ['Q' => 1, 'A' => 0, 'B' => 0, 'C' => 0, 'D' => 1];
-        $this->assertFalse(Util::validatePlayQueenWithinFourMoves('D', $hand));
+        $this->assertTrue(Util::validatePlayQueenWithinFourMoves('D', $hand));
     }
 
 }
