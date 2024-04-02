@@ -132,6 +132,6 @@ class Util
 
     public static function validatePlayQueenWithinFourMoves($piece, $hand)
     {
-        return array_sum($hand) <= 8 && $hand['Q'];
+        return $piece != 'Q' && array_sum($hand) <= 8 && $hand['Q'];
     }
 }
